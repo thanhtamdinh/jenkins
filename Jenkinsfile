@@ -8,22 +8,28 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+        NAME='DINHLE'
     }
     stages {
 
         stage('Initialize') {
+            environment {
+                NAME = 'HOANG'
+            }
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
                     echo "$BRANCH_NAME"
                     echo "$NODE_NAME"
+                    echo "$NAME"
                 ''' 
             }
         }
         stage('Build') {
             steps {
                 echo 'Building nginx image..'
+                echo '$NAME'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
                 sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
                 
