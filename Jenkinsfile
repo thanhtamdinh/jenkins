@@ -28,6 +28,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                sh 'echo $NAME'
                 echo 'Building nginx image..'
                 echo '${NAME}'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
