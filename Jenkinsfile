@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh 'echo $NAME'
                 echo 'Building nginx image..'
-                echo '${NAME}'
+                echo "${NAME}"
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
                 sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
                 
