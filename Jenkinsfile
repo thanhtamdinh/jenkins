@@ -35,6 +35,7 @@ pipeline {
                 // echo '${X}'
                 // echo "${Y}"
                 sh 'echo $NAME'
+                sh "echo ${NAME}"
                 echo 'Building nginx image..'
                 echo "${NAME}"
                 echo '$NAME'
