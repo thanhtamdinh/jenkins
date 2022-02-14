@@ -37,6 +37,7 @@ pipeline {
                 // echo "$Y"
                 // echo '${X}'
                 // echo "${Y}"
+                echo "${params.Greeting} World!"
                 sh 'echo $NAME'
                 sh "echo ${NAME}"
                 echo 'Building nginx image..'
