@@ -28,12 +28,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                def X = "abc"
-                def Y = 'mnq'
-                echo '$X'
-                echo "$Y"
-                echo '${X}'
-                echo "${Y}"
+                // def X = "abc"
+                // def Y = 'mnq'
+                // echo '$X'
+                // echo "$Y"
+                // echo '${X}'
+                // echo "${Y}"
                 sh 'echo $NAME'
                 echo 'Building nginx image..'
                 echo "${NAME}"
