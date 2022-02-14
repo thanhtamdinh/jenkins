@@ -56,5 +56,13 @@ pipeline {
                 sh 'docker container run -d --rm --name my-demo-springboot -p 8081:8080 --network jenkins hoangledinh65/springboot-image:1.0'
             }
         }
+        stage('Test') {
+            agent {
+                docker { image 'node:16.13.1-alpine'}
+            }
+            steps {
+                sh 'node --version'
+            }
+        }
     }
 }
