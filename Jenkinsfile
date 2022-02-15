@@ -10,7 +10,7 @@ pipeline {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         NAME = 'DINHLE'
         HOVATEN = 'DINHLEHOANG'
-
+        abc = 'asdf'
     }
     stages {
 
