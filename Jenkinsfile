@@ -26,14 +26,33 @@ pipeline {
                 ''' 
             }
         }
-        stage('Build') {
+        stage('Build in maven') {
+            agent {
+                docker {
+                    image 'maven:latest'
+                    reuseNode true
+                }
+            }
             steps {
                 sh 'echo $HOVATEN'
+
                 echo 'Building nginx image..'
-                echo '${NAME}'
+                sh 'mvn --version'
+                sh 'pwd'
+                sh 'ls -la'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
-                sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
+                stash includes : 'target/*.jar', name: 'app'
                 
+            }
+        }
+
+        stage('Package to docker image') {
+            steps {
+                sh 'mvn clean'
+                unstash 'app' 
+                sh 'ls -la'
+                sh 'ls -la target'
+                sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
             }
         }
         stage('Pushing image') {
