@@ -5,10 +5,12 @@ pipeline {
         maven 'my-maven' 
         jdk 'my-jdk' 
     }
-
+    
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         NAME = 'DINHLE'
+        HOVATEN = 'DINHLEHOANG'
+
     }
     stages {
 
@@ -18,8 +20,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
                     echo "$BRANCH_NAME"
                     echo "$NODE_NAME"
                     echo "$NAME"
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'echo $NAME'
+                sh 'echo $HOVATEN'
                 echo 'Building nginx image..'
                 echo '${NAME}'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
@@ -38,6 +38,7 @@ pipeline {
         }
         stage('Pushing image') {
             steps {
+                sh 'echo $HOVATEN'
                 echo 'Start pushing.. with credential'
                 sh 'echo $DOCKERHUB_CREDENTIALS'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -56,13 +57,6 @@ pipeline {
                 sh 'docker container run -d --rm --name my-demo-springboot -p 8081:8080 --network jenkins hoangledinh65/springboot-image:1.0'
             }
         }
-        stage('Test') {
-            agent {
-                docker { image 'node:16.13.1-alpine'}
-            }
-            steps {
-                sh 'node --version'
-            }
-        }
+
     }
 }
