@@ -49,7 +49,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
-                stash includes : '**/target/*.jar', name: 'app'
+                stash includes : 'target/*.jar', name: 'app'
                 
             }
         }
