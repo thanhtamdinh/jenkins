@@ -49,14 +49,16 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
-                sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
+                stash includes : '**/target/*.jar', name: 'app'
                 
             }
         }
 
         stage('Package to docker image') {
             steps {
+                unstash 'app' 
                 sh 'echo abc'
+                sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
             }
         }
         stage('Pushing image') {
