@@ -56,6 +56,7 @@ pipeline {
 
         stage('Package to docker image') {
             steps {
+                sh 'mvn clean'
                 unstash 'app' 
                 sh 'ls -la'
                 sh 'ls -la target'
