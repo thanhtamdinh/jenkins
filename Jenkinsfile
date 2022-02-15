@@ -58,9 +58,7 @@ pipeline {
             steps {
                 unstash 'app' 
                 sh 'ls -la'
-                sh 'cd target'
-                sh 'ls -la'
-                sh 'cd ..'
+                sh 'ls -la target'
                 sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
             }
         }
