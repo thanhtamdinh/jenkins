@@ -57,7 +57,7 @@ pipeline {
         stage('Package to docker image') {
             steps {
                 unstash 'app' 
-                sh 'echo abc'
+                sh 'ls -la'
                 sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
             }
         }
