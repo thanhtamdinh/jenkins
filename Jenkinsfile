@@ -22,7 +22,7 @@ pipeline {
                 sh '''
                     echo "$BRANCH_NAME"
                     echo "$NODE_NAME"
-                    echo "$NAME"
+                    echo "$abc"
                 ''' 
             }
         }
