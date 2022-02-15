@@ -1,10 +1,10 @@
 pipeline {
-    agent any
+    agent none
 
-    tools { 
-        maven 'my-maven' 
-        jdk 'my-jdk' 
-    }
+    // tools { 
+    //     maven 'my-maven' 
+    //     jdk 'my-jdk' 
+    // }
 
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
@@ -29,7 +29,13 @@ pipeline {
                 ''' 
             }
         }
-        stage('Build') {
+        stage('Build in maven') {
+            agent {
+                docker {
+                    image 'maven:latest'
+                    reuseNode true
+                }
+            }
             steps {
                 // def X = "abc"
                 // def Y = 'mnq'
@@ -37,15 +43,23 @@ pipeline {
                 // echo "$Y"
                 // echo '${X}'
                 // echo "${Y}"
-                echo "${params.Greeting} World!"
-                sh 'echo $NAME'
-                sh "echo ${NAME}"
+
+                // echo "${params.Greeting} World!"
+                // sh 'echo $NAME'
+                // sh "echo ${NAME}"
                 echo 'Building nginx image..'
-                echo "${NAME}"
-                echo '$NAME'
+                sh 'mvn --version'
+                sh 'pwd'
+                sh 'ls -la'
                 sh 'mvn clean package -Dmaven.test.failure.ignore=true'
                 sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
                 
+            }
+        }
+
+        stage('Package to docker image') {
+            steps {
+                sh 'echo abc'
             }
         }
         stage('Pushing image') {
