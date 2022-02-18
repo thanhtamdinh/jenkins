@@ -23,8 +23,6 @@ pipeline {
                     echo "$BRANCH_NAME"
                     echo "$NODE_NAME"
                     echo "$abc"
-                    echo "${params.DEPLOY_ENV}"
-                    echo "${env.BRANCH_NAME}"
                 ''' 
             }
         }
@@ -37,7 +35,7 @@ pipeline {
             }
             steps {
                 sh 'echo $HOVATEN'
-
+                echo "Hello ${params.DEPLOY_ENV}"
                 echo 'Building nginx image..'
                 sh 'mvn --version'
                 sh 'pwd'
