@@ -40,6 +40,7 @@ pipeline {
                 echo "Choice: ${params.CHOICE}"
 
                 echo "Password: ${params.PASSWORD}"
+                echo "Myname is : ${params.MYNAME}"
             }
         }
         stage('Build in maven') {
