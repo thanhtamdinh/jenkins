@@ -15,6 +15,8 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
 
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
+
+        string(name: 'MYNAME', defaultValue: 'BI', description: 'my name is BI')
     }
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
@@ -49,7 +51,7 @@ pipeline {
             }
             steps {
                 sh 'echo $HOVATEN'
-                echo "Hello ${params.DEPLOY_ENV}"
+                echo "Hello ${params.MYNAME}"
                 echo 'Building nginx image..'
                 sh 'mvn --version'
                 sh 'pwd'
