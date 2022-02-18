@@ -5,7 +5,7 @@ pipeline {
         maven 'my-maven' 
         jdk 'my-jdk' 
     }
-    
+    parameters { string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '') }
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         NAME = 'DINHLE'
@@ -23,6 +23,7 @@ pipeline {
                     echo "$BRANCH_NAME"
                     echo "$NODE_NAME"
                     echo "$abc"
+                    echo "$DEPLOY_ENV"
                 ''' 
             }
         }
