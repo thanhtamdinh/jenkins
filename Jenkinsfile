@@ -24,7 +24,7 @@ pipeline {
                     echo "$NODE_NAME"
                     echo "$abc"
                     echo "${params.DEPLOY_ENV}"
-                    echo "${env.BRANCH_N
+                    echo "${env.BRANCH_NAME
                 ''' 
             }
         }
