@@ -29,7 +29,7 @@ pipeline {
         stage('Initialize') {
             agent {
                 node {
-                    label 'linux'
+                    label 'aws'
                 }
             }
             environment {
@@ -46,6 +46,8 @@ pipeline {
 
                 echo "Password: ${params.PASSWORD}"
                 echo "Myname is : ${params.MYNAME}"
+                sh 'whoami'
+                sh 'pwd'
             }
         }
         stage('Build in maven') {
