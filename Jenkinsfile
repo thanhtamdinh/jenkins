@@ -46,7 +46,7 @@ pipeline {
 
                 echo "Password: ${params.PASSWORD}"
                 echo "Myname is : ${params.MYNAME}"
-                sh 'whoami'
+                // sh 'whoami'
                 sh 'mvn --version'
 
             }
