@@ -48,6 +48,8 @@ pipeline {
                 echo "Myname is : ${params.MYNAME}"
                 sh 'whoami'
                 sh 'pwd'
+                sh 'newvariable=${params.NAME}'
+                sh 'echo $newvariable'
             }
         }
         stage('Build in maven') {
