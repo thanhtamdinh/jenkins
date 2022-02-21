@@ -36,6 +36,7 @@ pipeline {
                 NAME = 'HOANG'
             }
             steps {
+                // sh 'sudo apt install maven'
                 echo "Hello ${params.PERSON}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
@@ -52,6 +53,11 @@ pipeline {
             }
         }
         stage('Build in maven') {
+            agent {
+                docker {
+                    image 'maven:latest'
+                }
+            }
             steps {
                 sh 'echo $HOVATEN'
                 echo "Hello ${params.MYNAME}"
@@ -66,8 +72,12 @@ pipeline {
         }
 
         stage('Package to docker image') {
+            agent {
+                docker {
+                    image 'maven:3.5.0'
+                }
+            }
             steps {
-                sh 'mvn clean'
                 unstash 'app' 
                 sh 'ls -la'
                 sh 'ls -la target'
