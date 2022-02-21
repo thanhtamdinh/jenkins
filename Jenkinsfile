@@ -27,12 +27,6 @@ pipeline {
     stages {
 
         stage('Initialize') {
-            agent {
-                docker {
-                    image 'maven:latest'
-                    reuseNode true
-                }
-            }
             environment {
                 NAME = 'HOANG'
             }
@@ -49,17 +43,10 @@ pipeline {
                 echo "Myname is : ${params.MYNAME}"
                 sh 'whoami'
                 sh 'pwd'
-                sh 'newvariable=${params.NAME}'
-                sh 'echo $newvariable'
+
             }
         }
         stage('Build in maven') {
-            agent {
-                docker {
-                    image 'maven:latest'
-                    reuseNode true
-                }
-            }
             steps {
                 sh 'echo $HOVATEN'
                 echo "Hello ${params.MYNAME}"
