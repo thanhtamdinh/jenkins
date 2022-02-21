@@ -27,11 +27,11 @@ pipeline {
     stages {
 
         stage('Initialize') {
-            agent {
-                node {
-                    label 'aws'
-                }
-            }
+            // agent {
+            //     node {
+            //         label 'aws'
+            //     }
+            // }
             environment {
                 NAME = 'HOANG'
             }
