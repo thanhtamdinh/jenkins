@@ -27,6 +27,11 @@ pipeline {
     stages {
 
         stage('Initialize') {
+            agent {
+                docker {
+                    image 'maven:latest'
+                }
+            }
             environment {
                 NAME = 'HOANG'
             }
@@ -42,7 +47,7 @@ pipeline {
                 echo "Password: ${params.PASSWORD}"
                 echo "Myname is : ${params.MYNAME}"
                 sh 'whoami'
-                sh 'pwd'
+                sh 'mvn --version'
 
             }
         }
