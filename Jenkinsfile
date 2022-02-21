@@ -28,8 +28,8 @@ pipeline {
 
         stage('Initialize') {
             agent {
-                docker {
-                    image 'maven:latest'
+                node {
+                    label 'aws'
                 }
             }
             environment {
@@ -47,7 +47,7 @@ pipeline {
                 echo "Password: ${params.PASSWORD}"
                 echo "Myname is : ${params.MYNAME}"
                 sh 'whoami'
-                sh 'mvn --version'
+                // sh 'mvn --version'
 
             }
         }
