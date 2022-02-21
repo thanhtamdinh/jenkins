@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
 
     tools { 
         maven 'my-maven' 
@@ -27,11 +27,12 @@ pipeline {
     stages {
 
         stage('Initialize') {
-            // agent {
-            //     node {
-            //         label 'aws'
-            //     }
-            // }
+            agent {
+                docker {
+                    image 'maven:latest'
+                    reuseNode true
+                }
+            }
             environment {
                 NAME = 'HOANG'
             }
