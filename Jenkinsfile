@@ -53,11 +53,11 @@ pipeline {
             }
         }
         stage('Build in maven') {
-            agent {
-                docker {
-                    image 'maven:latest'
-                }
-            }
+            // agent {
+            //     docker {
+            //         image 'maven:latest'
+            //     }
+            // }
             steps {
                 sh 'echo $HOVATEN'
                 echo "Hello ${params.MYNAME}"
@@ -72,11 +72,7 @@ pipeline {
         }
 
         stage('Package to docker image') {
-            agent {
-                docker {
-                    image 'maven:3.5.0'
-                }
-            }
+
             steps {
                 unstash 'app' 
                 sh 'ls -la'
