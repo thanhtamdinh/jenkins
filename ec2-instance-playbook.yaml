@@ -13,8 +13,8 @@
         name: git
     - name: install java
       apt:  
-        name: default-jdk
-      become: yes
+        name: openjdk-8-jdk
+        update_cache: yes
     # - name: delete directory
     #   shell: rm -rf /home/ubuntu/newdirectory
     # - name: create a directory 
