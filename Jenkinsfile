@@ -105,6 +105,8 @@ pipeline {
 
         stage('Ansible') {
             steps {
+                sh 'cat hosts'
+                sh 'cat ec2-instance-playbook.yaml'
                 ansiblePlaybook become: true, credentialsId: 'agent-credential', installation: 'my-ansible', inventory: 'hosts', playbook: 'ec2-instance-playbook.yaml'
             }
         }
