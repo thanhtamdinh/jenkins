@@ -8,6 +8,12 @@
     #   shell: echo "abc" > /home/devops/newfile
     - name: new task 
       shell: touch a
+    - name: install git
+      apt:
+        name: git
+    - name: install java
+      apt:  
+        name: openjdk-8
     # - name: delete directory
     #   shell: rm -rf /home/ubuntu/newdirectory
     # - name: create a directory 

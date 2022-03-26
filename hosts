@@ -1,2 +1,2 @@
-[awsdemo]
-54.151.130.175 ansible_ssh_user=ubuntu
+[aws-demo]
+54.151.130.175 ansible_ssh_user=ubuntu ansible_ssh_private_key_file=/home/admin123/.ssh/aws-keypair.pem
