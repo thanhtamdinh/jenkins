@@ -95,7 +95,7 @@ pipeline {
             steps {
                 echo 'Deploying and cleaning'
                 sh 'docker image rm hoangledinh65/springboot-image:1.0 || echo "this image does not exist" '
-                sh 'docker container stop my-demo-springboot --network jenkins || echo "this container does not exist" '
+                sh 'docker container stop my-demo-springboot || echo "this container does not exist" '
                 sh 'docker network create jenkins || echo "this network exists"'
                 sh 'echo y | docker container prune '
                 sh 'echo y | docker image prune'
@@ -103,11 +103,9 @@ pipeline {
             }
         }
 
-        stage('Provisioning') {
+        stage('Ansible') {
             steps {
-                sh 'cd terraform'
-                sh 'terraform init'
-                sh 'terraform plan || true'
+                ansiblePlaybook become: true, credentialsId: 'agent-credential', installation: 'my-ansible', inventory: 'hosts', playbook: 'ec2-instance-playbook.yaml'
             }
         }
 
