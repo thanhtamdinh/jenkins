@@ -1,2 +1,2 @@
-[aws-demo]
+[awsdemo]
 54.151.130.175 ansible_ssh_user=ubuntu
