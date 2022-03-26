@@ -109,7 +109,7 @@ pipeline {
                 sh 'cat ec2-instance-playbook.yaml'
                 sh 'chmod 400 aws-key.pem'
                 sh 'ansible-playbook ec2-instance-playbook.yaml -i hosts --private-key aws-key.pem'
-                ansiblePlaybook become: true, credentialsId: 'agent-credential', installation: 'my-ansible', inventory: 'hosts', playbook: 'ec2-instance-playbook.yaml'
+                // ansiblePlaybook become: true, credentialsId: 'agent-credential', installation: 'my-ansible', inventory: 'hosts', playbook: 'ec2-instance-playbook.yaml'
             }
         }
 
