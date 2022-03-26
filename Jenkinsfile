@@ -4,6 +4,7 @@ pipeline {
     tools { 
         maven 'my-maven' 
         jdk 'my-jdk' 
+        terraform 'my-terraform'
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -99,6 +100,14 @@ pipeline {
                 sh 'echo y | docker container prune '
                 sh 'echo y | docker image prune'
                 sh 'docker container run -d --rm --name my-demo-springboot -p 8082:8080 --network jenkins hoangledinh65/springboot-image:1.0'
+            }
+        }
+
+        stage('Provisioning') {
+            steps {
+                sh 'cd terraform'
+                sh 'terraform init'
+                sh 'terraform plan || true'
             }
         }
 
