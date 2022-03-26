@@ -1,0 +1,24 @@
+- name : ec2instance-playbook
+  hosts: aws-demo
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    # - name: create a file
+    #   shell: echo "abc" > /home/devops/newfile
+    - name: new task 
+      shell: touch a
+    # - name: delete directory
+    #   shell: rm -rf /home/ubuntu/newdirectory
+    # - name: create a directory 
+    #   shell: mkdir /home/ubuntu/newdirectory
+
+    # - name: create a file
+    #   shell: touch /home/devops/abc && echo "abc" > abc; \
+    #          touch /home/devops/mnq && mkdir qwe
+    # - name: add user 
+    #   user: 
+    #     name: demouser
+    #     uid: 1040
+    #     home: /home/demouser
+    #     shell: /bin/bash
