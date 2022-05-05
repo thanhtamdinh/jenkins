@@ -4,7 +4,6 @@ pipeline {
     tools { 
         maven 'my-maven' 
         jdk 'my-jdk' 
-        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '1.19'
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
@@ -28,6 +27,8 @@ pipeline {
     stages {
 
         stage('Initialize') {
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
             agent {
                 docker {
                     image 'maven:latest'
