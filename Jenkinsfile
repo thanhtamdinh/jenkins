@@ -4,6 +4,7 @@ pipeline {
     tools { 
         maven 'my-maven' 
         jdk 'my-jdk' 
+        'org.jenkinsci.plugins.docker.commons.tools.DockerTool' 'docker'
     }
     parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
