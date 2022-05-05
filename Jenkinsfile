@@ -20,8 +20,8 @@ pipeline {
     }
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-        NAME = 'DINHLE'
-        HOVATEN = 'DINHLEHOANG'
+        NAME = 'tamdinh0812'
+        HOVATEN = 'TamDinh'
         abc = 'asdf'
     }
     stages {
@@ -33,7 +33,7 @@ pipeline {
                 }
             }
             environment {
-                NAME = 'HOANG'
+                NAME = 'Tam'
             }
             steps {
                 // sh 'sudo apt install maven'
@@ -77,7 +77,7 @@ pipeline {
                 unstash 'app' 
                 sh 'ls -la'
                 sh 'ls -la target'
-                sh 'docker build -t hoangledinh65/springboot-image:1.0 .'
+                sh 'docker build -t tamdinh0812/jenkins:1.0 .'
             }
         }
         stage('Pushing image') {
@@ -86,20 +86,20 @@ pipeline {
                 echo 'Start pushing.. with credential'
                 sh 'echo $DOCKERHUB_CREDENTIALS'
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker push hoangledinh65/springboot-image:1.0'
+                sh 'docker push tamdinh0812/jenkins:1.0'
                 
             }
         }
         stage('Deploying and Cleaning') {
             steps {
                 echo 'Deploying and cleaning'
-                sh 'docker image rm hoangledinh65/springboot-image:1.0 || echo "this image does not exist" '
+                sh 'docker image rm tamdinh0812/jenkins:1.0 || echo "this image does not exist" '
                 sh 'docker container stop my-demo-springboot || echo "this container does not exist" '
                 sh 'docker network create jenkins || echo "this network exists"'
                 sh 'echo y | docker container prune '
                 sh 'echo y | docker image prune'
-                sh 'docker container run -d --rm --name my-demo-springboot -p 8082:8080 --network jenkins hoangledinh65/springboot-image:1.0'
-                sh 'echo hoangledinh65'
+                sh 'docker container run -d --rm --name my-demo-springboot -p 8082:8080 --network jenkins tamdinh0812/jenkins:1.0'
+                sh 'echo TamDinh'
             }
         }
 
